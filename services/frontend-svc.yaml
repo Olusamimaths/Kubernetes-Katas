@@ -1,14 +1,14 @@
-apiVersion: 
-kind: 
+apiVersion: v1
+kind: Service
 metadata:
   labels:
-    run: 
-  name: 
+    run: frontend
+  name: frontend
 spec:
   ports:
-  - port: 
-    protocol: 
-    targetPort: 
+  - port: 5000
+    protocol: TCP
+    targetPort: 5000
   selector:
-    run: 
-  type: 
+    run: frontend
+  type: NodePort
