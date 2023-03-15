@@ -1,10 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: # Deployment name
+  name: frontend # Deployment name
   labels: # Deployment labels
+    run: frontend
 spec:
-    replicas: # the number of pods to run
+    replicas: 3 # the number of pods to run
     selector: # How to select pods belonging to this deployment. Must match the pod template's labels
         matchLabels: # List of labels
+          run: frontend
     template: # This is the pod template, paste in the pod spec from frontend-pod.yaml
+      metadata:
+        labels:
+          run: frontend
+        name: frontend
+      spec:
+        containers:
+          - image: ghcr.io/eficode-academy/quotes-flask-frontend:release
+            name: frontend
+            resources: {}
+            env:
+              - name: BACKEND_HOST
+                value: backend
+              - name: BACKEND_PORT
+                value: "5000"
