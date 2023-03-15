@@ -6,6 +6,10 @@ metadata:
   name: backend
 spec:
   replicas: 3
+  strategy:
+    rollingUpdate:
+      maxSurge:  100%
+      maxUnavailable: 100%
   selector:
     matchLabels:
       app: backend
@@ -15,5 +19,5 @@ spec:
         app: backend
     spec:
       containers:
-      - image: ghcr.io/eficode-academy/quotes-flask-backend:release
+      - image: ghcr.io/eficode-academy/quotes-flask-backend:2.0.0
         name: quotes-flask-backend
