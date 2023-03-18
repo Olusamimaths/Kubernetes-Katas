@@ -17,12 +17,20 @@ spec:
       labels:
         app: postgres
     spec:
+      volumes:
+        - name: postgres-pvc
+          persistentVolumeClaim:
+            claimName: postgres-pvc
       containers:
         - image: postgres:14.3
           name: postgres
           ports:
             - containerPort: 5432
           resources: {}
+          volumeMounts:
+            - name: postgres-pvc
+              mountPath: /var/lib/postgresql/data
+              subPath: postgres
           env:
             - name: POSTGRES_USER
               valueFrom:
