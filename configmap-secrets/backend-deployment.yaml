@@ -24,14 +24,8 @@ spec:
         name: quotes-flask-backend
         imagePullPolicy: Always
         ### using hardcoded env vars
-        env:
-        - name: DB_HOST
-          value: postgres
-        - name: DB_PORT
-          value: "5432"
-        - name: DB_USER
-          value: superuser
-        - name: DB_PASSWORD
-          value: complicated
-        - name: DB_NAME
-          value: quotes
+        envFrom:
+          - configMapRef:
+              name: postgres-config
+          - secretRef:
+              name: postgres-secret
